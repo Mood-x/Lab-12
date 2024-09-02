@@ -1,6 +1,7 @@
 package com.example.blog_security.Advice;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -94,4 +95,8 @@ public class ControllerAdvice {
         return ResponseEntity.status(400).body(e.getMessage()); 
     }
 
+    @ExceptionHandler(value = IncorrectResultSizeDataAccessException.class)
+    public ResponseEntity IncorrectResultSizeDataAccessException(IncorrectResultSizeDataAccessException e){
+        return ResponseEntity.status(400).body(e.getMessage()); 
+    }
 }

@@ -34,18 +34,18 @@ public class BlogController {
     }
 
     @GetMapping("/get-my-posts")
-    public ResponseEntity<List<Blog>> getMyPosts(Integer authId){
-        return ResponseEntity.ok(blogSerivce.getMyPosts(authId));
+    public ResponseEntity<List<Blog>> getMyPosts(@AuthenticationPrincipal User user){
+        return ResponseEntity.ok(blogSerivce.getMyPosts(user.getId()));
     }
 
     @GetMapping("/get-post-by-id")
-    public ResponseEntity<Blog> getPostById(Integer authId, @RequestParam Integer postId){
-        return ResponseEntity.ok(blogSerivce.getPostById(authId, postId));
+    public ResponseEntity<Blog> getPostById(@AuthenticationPrincipal User user, @RequestParam Integer postId){
+        return ResponseEntity.ok(blogSerivce.getPostById(user.getId(), postId));
     }
 
     @GetMapping("/get-post-by-title")
-    public ResponseEntity<Blog> getPostByTitle(Integer authId, @RequestParam String title){
-        return ResponseEntity.ok(blogSerivce.getPostByTitle(authId, title));
+    public ResponseEntity<Blog> getPostByTitle(@AuthenticationPrincipal User user, @RequestParam String title){
+        return ResponseEntity.ok(blogSerivce.getPostByTitle(user.getId(), title));
     }
 
     @PostMapping("/create-post")

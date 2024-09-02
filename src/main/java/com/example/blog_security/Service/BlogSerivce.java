@@ -48,7 +48,7 @@ public class BlogSerivce {
         User user =  authRepository.findUserById(authId)
             .orElseThrow(() -> new ApiException("USER NOT FOUND")); 
 
-        Blog blog = blogRepository.findBlogByTitle(title)
+        Blog blog = blogRepository.findByTitleِAndUserId(title, authId)
             .orElseThrow(() -> new ApiException("POST NOT FOUND")); 
 
         if(!blog.getUser().getId().equals(authId)){
